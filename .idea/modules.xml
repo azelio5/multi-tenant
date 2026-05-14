@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/back.iml" filepath="$PROJECT_DIR$/.idea/back.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multi-tenant/multi-tenant.iml" filepath="$PROJECT_DIR$/multi-tenant/multi-tenant.iml" />
     </modules>
   </component>
 </project>
