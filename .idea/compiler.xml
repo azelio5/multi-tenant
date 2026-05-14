@@ -7,13 +7,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for multi-tenant2" enabled="true">
+        <sourceOutputDir name="../multi-tenant-schemafori/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../multi-tenant-schemafori/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
         <module name="multi-tenant" />
+      </profile>
+      <profile name="Annotation profile for multi-tenant" enabled="true">
+        <sourceOutputDir name="../multi-tenant/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../multi-tenant/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="multi-tenant (1)" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="multi-tenant" options="-parameters" />
+      <module name="multi-tenant (1)" options="-parameters" />
     </option>
   </component>
 </project>
