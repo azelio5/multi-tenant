@@ -1,5 +1,6 @@
 package com.anvar.saas.controllers;
 
+import com.anvar.saas.common.PageResponse;
 import com.anvar.saas.requests.CategoryRequest;
 import com.anvar.saas.responses.CategoryResponse;
 import com.anvar.saas.services.CategoryService;
@@ -31,8 +32,13 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> getAllCategories(){
-        return ResponseEntity.ok(this.service.findAll());
+    public ResponseEntity<PageResponse<CategoryResponse>> findAllCategories(
+            @RequestParam(name = "page", defaultValue = "0")
+            final int page,
+            @RequestParam(name = "size", defaultValue = "10")
+            final int size
+    ) {
+        return ResponseEntity.ok(this.service.findAll(page, size));
     }
 
 

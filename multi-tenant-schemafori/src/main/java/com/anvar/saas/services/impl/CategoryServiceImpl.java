@@ -2,6 +2,7 @@ package com.anvar.saas.services.impl;
 
 import com.anvar.saas.common.PageResponse;
 import com.anvar.saas.entities.Category;
+import com.anvar.saas.exceptions.DuplicateResourceException;
 import com.anvar.saas.mappers.CategoryMapper;
 import com.anvar.saas.repositories.CategoryRepository;
 import com.anvar.saas.requests.CategoryRequest;
@@ -11,6 +12,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,7 +62,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public PageResponse<CategoryResponse> findAll(int page, int size) {
-        return null;
+        final PageRequest pageRequest = PageRequest.of(page, size);
+        final Page<Category> categoryPage = this.categoryRepository.findAll(pageRequest);
+        final Page<CategoryResponse> categoryResponsePage = categoryPage.map(categoryMapper::toResponse);
+        return PageResponse.of(categoryResponsePage);
     }
 
 
@@ -79,7 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         if (category.isPresent()) {
             log.debug("Category {} exists", name);
-            throw new RuntimeException("Category " + name + " already exists");
+            throw new DuplicateResourceException("Category " + name + " already exists");
         }
     }
 }
